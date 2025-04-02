@@ -1,7 +1,8 @@
 # Created by pyp2rpm-3.3.5
 %global module sphinx-autodoc-typehints
 %global uname sphinx_autodoc_typehints
-%bcond_without test
+# tests disabled for abf
+%bcond_with test
 
 Name:			python-%{module}
 Version:		3.1.0
@@ -20,6 +21,7 @@ BuildRequires:	python%{pyver}dist(setuptools)
 BuildRequires:	python%{pyver}dist(setuptools-scm)
 BuildRequires:	python%{pyver}dist(hatchling) >= 1.27
 BuildRequires:	python%{pyver}dist(hatch-vcs) >= 0.4
+Requires:	python%{pyver}dist(sphinx) >= 8.2
 
 %if %{with test}
 # for tests
@@ -57,7 +59,6 @@ pip install -e .[test]
 
 %files -n python-%{module}
 %license LICENSE
-%doc README.rst
-%{python3_sitelib}/__pycache__/*
-%{python3_sitelib}/sphinx_autodoc_typehints.py
-%{python3_sitelib}/sphinx_autodoc_typehints-%{version}-py%{python3_version}.egg-info
+%doc README.md
+%{python3_sitelib}/%{uname}
+%{python3_sitelib}/%{uname}-%{version}.dist-info
